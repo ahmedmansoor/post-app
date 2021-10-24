@@ -21,5 +21,5 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', "PostController@index")->name("home");
-Route::post('store', "PostController@store")->name("store");
+Route::get('/', 'PostController@index')->name('home');
+Route::post('store', 'PostController@store')->name('store');

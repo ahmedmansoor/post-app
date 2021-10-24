@@ -36,14 +36,26 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = new Post();
-        $post->image = $request->input("name");
-        $post->details = $request->input("details");
+        $post->name = $request->input('name');
+        $post->details = $request->input('details');
+        $post->image = $request->input('image');
+
+        // $input = $request->all();
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+        $input['image'] = $imageName;
+
+
+        $post->image = $request->image->move(public_path('images'), $imageName);
         $post->save();
 
+        // dd($imageName);
         $allposts = Post::all();
-        return view("allposts")->with('allposts', $allposts);
-        // return $name;
-
+        return view("allposts")->with('allposted', $allposts);
     }
 
     /**

@@ -1,4 +1,11 @@
 <h1>All posts here</h1>
-@foreach($allposts as $post)
-{{$post->image}}
+
+
+@foreach($allposted as $post)
+{{$post->name}}
+<!-- {{$post->image}} -->
+
 @endforeach
+
+<?php
+// dd($post);
