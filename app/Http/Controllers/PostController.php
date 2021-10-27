@@ -49,9 +49,11 @@ class PostController extends Controller
         $imageName = time() . '.' . $request->image->getClientOriginalExtension();
         $input['image'] = $imageName;
 
-
-        $post->image = $request->image->move(public_path('images'), $imageName);
+        $post->image = $request->image->storeAs('images', $imageName);
         $post->save();
+
+        $request->image->move(public_path('images'), $imageName);
+
 
         // dd($imageName);
         $allposts = Post::all();

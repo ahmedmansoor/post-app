@@ -13,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', "PostController@mansoorTwo")->name("mansoorTwo");
-// Route::get('/{id}', "PostController@mansoor")->name("mansoor");
-// Route::get('/{id}/{name}', "PostController@mansoorThree")->name("mansoorThree");
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/', 'PostController@index')->name('home');
+Route::get('/post', function () {
+    return view('post');
+})->middleware(['auth'])->name('post');
+
 Route::post('store', 'PostController@store')->name('store');
+
+require __DIR__ . '/auth.php';
